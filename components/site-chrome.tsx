@@ -14,6 +14,7 @@ export function Header() {
           <Link href="/#courtyard">Двор</Link>
           <Link href="/#gallery">Фото</Link>
           <Link href="/#location">Как добраться</Link>
+          <Link href="/blog">Блог</Link>
         </nav>
         <Link className="button header-cta" href="/#booking">Забронировать</Link>
       </div>
@@ -26,6 +27,7 @@ export function Footer() {
     <footer className="site-footer">
       <div className="wrap footer-inner">
         <span>{hotel.name}</span>
+        <Link href="/blog">Блог</Link>
         <a href={hotel.instagram}>Instagram</a>
         <a href={hotel.booking}>Booking.com</a>
         <a href={hotel.whatsapp}>WhatsApp {hotel.phone}</a>
