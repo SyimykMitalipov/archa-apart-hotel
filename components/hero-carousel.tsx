@@ -9,7 +9,11 @@ const slides = [
   { src: "/images/apartment.webp", alt: "Гостиная с обеденным столом и жёлтым диваном" },
   { src: "/images/covered-terrace.webp", alt: "Крытая терраса с большим столом и настольным теннисом" },
   { src: "/images/kitchen.webp", alt: "Кухня апартаментов с плитой и холодильником" },
-  { src: "/images/facade-day.webp", alt: "Фасад Archa Apart Hotel и детская площадка днём" },
+  {
+    src: "/images/facade-day.webp",
+    alt: "Фасад Archa Apart Hotel и детская площадка днём",
+    fit: "contain",
+  },
 ];
 
 export function HeroCarousel() {
@@ -57,10 +61,11 @@ export function HeroCarousel() {
   return (
     <>
       <div ref={photos} className="hero-photos">
-        {slides.map(({ src, alt }, index) => (
-          <div key={src} className="hero-slide" data-active={active === index}
+        {slides.map(({ src, alt, fit }, index) => (
+          <div key={src} className="hero-slide" data-active={active === index} data-fit={fit}
             aria-hidden={active !== index}>
-            <Image className="hero-image" src={src} alt={alt} fill sizes="100vw"
+            <Image className="hero-image" src={src} alt={alt} fill
+              sizes={fit === "contain" ? "(max-width: 640px) 260px, 395px" : "100vw"}
               preload={index === 0} fetchPriority={index === 0 ? undefined : "low"} />
           </div>
         ))}

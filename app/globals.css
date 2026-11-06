@@ -128,6 +128,12 @@ img { display: block; }
 .hero-slide { opacity: 0; transition: opacity 550ms ease-in-out; }
 .hero-slide[data-active="true"] { opacity: 1; }
 
+.hero-slide[data-fit="contain"] { background: #17352d; }
+.hero-slide[data-fit="contain"] .hero-image {
+  object-fit: contain;
+  object-position: 78% center;
+}
+
 .hero-controls {
   position: absolute;
   z-index: 2;
@@ -419,6 +425,7 @@ img { display: block; }
   .site-header nav { gap: 8px; font-size: 14px; }
   .hero { min-height: 462px; }
   .hero-image { object-position: 61% center; }
+  .hero-slide[data-fit="contain"] .hero-image { object-position: center; }
   .hero-content { padding-block: 40px; }
   .hero-actions { gap: 10px; }
   .hero-actions span { font-size: 14px; }
