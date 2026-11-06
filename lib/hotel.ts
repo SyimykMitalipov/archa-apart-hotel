@@ -14,16 +14,8 @@ export const hotel = {
 
 export const hotelMaps = [
   { name: "2ГИС", href: hotel.map },
-  {
-    name: "Google Maps",
-    href: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-      `${hotelCoordinates.latitude},${hotelCoordinates.longitude}`,
-    )}`,
-  },
-  {
-    name: "Яндекс Карты",
-    href: `https://yandex.ru/maps/?pt=${hotelCoordinates.longitude},${hotelCoordinates.latitude}&z=17`,
-  },
+  { name: "Google Maps", href: "https://maps.app.goo.gl/k4ggWJqkury5FwEy9" },
+  { name: "Яндекс Карты", href: "https://yandex.com/maps/-/CXvqiR0t" },
 ];
 
 export const rooms = [
