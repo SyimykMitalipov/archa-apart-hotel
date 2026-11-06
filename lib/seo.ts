@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { hotel } from "./hotel";
+import { hotel, hotelCoordinates } from "./hotel";
 
 function configuredOrigin() {
   const raw = process.env.SITE_URL;
@@ -55,7 +55,7 @@ export const hotelSchema = {
     addressLocality: hotel.city,
     addressCountry: "KG",
   },
-  geo: { "@type": "GeoCoordinates", latitude: 42.933929, longitude: 74.653311 },
+  geo: { "@type": "GeoCoordinates", ...hotelCoordinates },
   hasMap: hotel.map,
   sameAs: [hotel.map, hotel.booking, hotel.instagram],
   amenityFeature: ["Wi-Fi", "Частная парковка", "Терраса", "Детская площадка"].map((name) => ({
