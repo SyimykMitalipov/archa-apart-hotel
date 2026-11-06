@@ -6,8 +6,10 @@ import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 
 const slides = [
   { src: "/images/hero.webp", alt: "Гостиная апартаментов Archa с жёлтым диваном" },
-  { src: "/images/facade-night.webp", alt: "Фасад Archa Apart Hotel с вечерней подсветкой" },
-  { src: "/images/courtyard.webp", alt: "Двор отеля с очагом и детской площадкой" },
+  { src: "/images/apartment.webp", alt: "Гостиная с обеденным столом и жёлтым диваном" },
+  { src: "/images/covered-terrace.webp", alt: "Крытая терраса с большим столом и настольным теннисом" },
+  { src: "/images/kitchen.webp", alt: "Кухня апартаментов с плитой и холодильником" },
+  { src: "/images/facade-day.webp", alt: "Фасад Archa Apart Hotel и детская площадка днём" },
 ];
 
 export function HeroCarousel() {
