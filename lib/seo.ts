@@ -47,6 +47,8 @@ export const hotelSchema = {
   alternateName: "Арча апарт-отель",
   description: hotel.description,
   telephone: hotel.phone,
+  image: siteOrigin ? new URL("/images/hero.webp", siteOrigin).href : undefined,
+  logo: siteOrigin ? new URL("/images/brand.webp", siteOrigin).href : undefined,
   address: {
     "@type": "PostalAddress",
     streetAddress: hotel.street,
@@ -62,3 +64,16 @@ export const hotelSchema = {
     value: true,
   })),
 };
+
+export function roomBreadcrumbSchema(name: string, slug: string) {
+  if (!siteOrigin) return undefined;
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: hotel.name, item: `${siteOrigin}/` },
+      { "@type": "ListItem", position: 2, name, item: `${siteOrigin}/rooms/${slug}` },
+    ],
+  };
+}

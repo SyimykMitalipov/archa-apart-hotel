@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import { BookingSection } from "../../../components/booking-section";
 import { hotel, rooms } from "../../../lib/hotel";
-import { pageMetadata } from "../../../lib/seo";
+import { pageMetadata, roomBreadcrumbSchema } from "../../../lib/seo";
 
 type RoomPageProps = { params: Promise<{ slug: string }> };
 export const dynamicParams = false;
@@ -26,9 +26,21 @@ export default async function RoomPage({ params }: RoomPageProps) {
   const room = rooms.find((entry) => entry.slug === slug);
   if (!room) notFound();
 
+  const breadcrumb = roomBreadcrumbSchema(room.name, room.slug);
+
   return (
     <main id="main">
+      {breadcrumb && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumb).replace(/</g, "\\u003c"),
+        }} />
+      )}
       <article className="wrap room-detail">
+        <nav className="breadcrumb" aria-label="Хлебные крошки">
+          <Link href="/" className="text-link">{hotel.name}</Link>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page">{room.name}</span>
+        </nav>
         <Link href="/#rooms" className="text-link"><ArrowLeft size={17} aria-hidden="true" /> Все номера</Link>
         <div className="room-detail-grid">
           <div>
@@ -37,12 +49,9 @@ export default async function RoomPage({ params }: RoomPageProps) {
             <p>{room.description}</p>
             <a href="#booking" className="button">Узнать свободные даты</a>
           </div>
-          <figure>
-            <div className="room-image">
-              <Image src={room.image} alt={room.imageAlt} fill preload sizes="(max-width: 720px) 100vw, 55vw" />
-            </div>
-            <figcaption className="image-note">Изображение воссоздано по референсам отеля.</figcaption>
-          </figure>
+          <div className="room-image">
+            <Image src={room.image} alt={room.imageAlt} fill preload sizes="(max-width: 720px) 100vw, 55vw" />
+          </div>
         </div>
       </article>
       <BookingSection room={room.name} />

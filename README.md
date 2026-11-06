@@ -19,7 +19,7 @@ npm run dev
 
 ## SEO и запуск на домене
 
-- Перед публикацией замените визуализации в `public/images/` на согласованные фотографии отеля, обновите подписи и alt, сверьте адрес, телефон и описание категорий. Источники сведений — карточки [2ГИС](https://2gis.kg/bishkek/firm/70000001118204069) и [Booking.com](https://www.booking.com/hotel/kg/archa-apart-bishkek.ru.html).
+- В `public/images/` находятся фотографии отеля в WebP. Разделы галереи и описания фотографий заданы в `lib/photos.ts`. Перед публикацией сверьте адрес, телефон и описание категорий. Источники сведений — карточки [2ГИС](https://2gis.kg/bishkek/firm/70000001118204069) и [Booking.com](https://www.booking.com/hotel/kg/archa-apart-bishkek.ru.html).
 - Для публичной сборки задайте `SITE_URL` (канонический HTTPS-адрес) и `SITE_INDEXABLE=true` перед `npm run build`. Без этих настроек страницы отдаются с `noindex` и sitemap не включает URL. Настраивайте переменные отдельно для production и preview.
 - Приложение формирует canonical, метаданные Open Graph, JSON-LD Hotel, robots.txt, sitemap.xml и llms.txt. Страницы содержат обычные HTML-ссылки, описание номеров и адрес, доступные без клиентского JavaScript.
 - После выхода на домене подтвердите его в Google Search Console, отправьте sitemap и проверьте главную и страницы номеров в URL Inspection. Для метода HTML-тега можно задать `GOOGLE_SITE_VERIFICATION`. Затем проверьте PageSpeed Insights. CrUX появится при достаточном объёме полевых данных.

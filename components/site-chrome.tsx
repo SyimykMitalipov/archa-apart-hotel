@@ -12,6 +12,7 @@ export function Header() {
         <nav aria-label="Главная навигация">
           <Link href="/#rooms">Номера</Link>
           <Link href="/#courtyard">Двор</Link>
+          <Link href="/#gallery">Фото</Link>
           <Link href="/#location">Как добраться</Link>
         </nav>
         <Link className="button header-cta" href="/#booking">Узнать свободные даты</Link>
@@ -27,7 +28,7 @@ export function Footer() {
         <span>{hotel.name}</span>
         <a href={hotel.instagram}>Instagram</a>
         <a href={hotel.booking}>Booking.com</a>
-        <a href={hotel.whatsapp}>WhatsApp</a>
+        <a href={hotel.whatsapp}>WhatsApp {hotel.phone}</a>
       </div>
     </footer>
   );
