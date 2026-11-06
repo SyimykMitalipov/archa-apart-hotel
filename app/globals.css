@@ -608,3 +608,7 @@ img { display: block; }
 @media (max-width: 640px) {
   .blog-grid { grid-template-columns: 1fr; }
 }
+
+body:has(> [data-hotel-links]) > :is(.site-header, .site-footer, .floating-whatsapp) {
+  display: none;
+}
