@@ -15,7 +15,7 @@ export function Header() {
           <Link href="/#gallery">Фото</Link>
           <Link href="/#location">Как добраться</Link>
         </nav>
-        <Link className="button header-cta" href="/#booking">Узнать свободные даты</Link>
+        <Link className="button header-cta" href="/#booking">Забронировать</Link>
       </div>
     </header>
   );

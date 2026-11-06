@@ -47,7 +47,7 @@ export default async function RoomPage({ params }: RoomPageProps) {
             <p className="eyebrow">{hotel.name} · {hotel.city}</p>
             <h1>{room.name}</h1>
             <p>{room.description}</p>
-            <a href="#booking" className="button">Узнать свободные даты</a>
+            <a href="#booking" className="button">Забронировать</a>
           </div>
           <div className="room-image">
             <Image src={room.image} alt={room.imageAlt} fill preload sizes="(max-width: 720px) 100vw, 55vw" />

@@ -25,7 +25,7 @@ export default function Home() {
           <h1 id="hotel-title">{hotel.name}</h1>
           <p>Апарт-отель в Бишкеке</p>
           <div className="hero-actions">
-            <a className="button button-light" href="#booking">Узнать свободные даты</a>
+            <a className="button button-light" href="#booking">Забронировать</a>
             <a className="hero-gallery-link" href="#gallery">Смотреть фото</a>
             <span><ArrowDown aria-hidden="true" size={16} /> Запрос в WhatsApp</span>
           </div>
