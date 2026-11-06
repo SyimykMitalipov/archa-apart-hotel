@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowDown, ArrowRight, ArrowUpRight, CarFront, MapPin, Trees, Wifi } from "lucide-react";
+import { HeroCarousel } from "../components/hero-carousel";
 import { PhotoGallery } from "../components/photo-gallery";
 import { BookingSection } from "../components/booking-section";
 import { hotel, hotelMaps, rooms } from "../lib/hotel";
@@ -19,8 +20,7 @@ export default function Home() {
         __html: JSON.stringify(hotelSchema).replace(/</g, "\\u003c"),
       }} />
       <section className="hero" aria-labelledby="hotel-title">
-        <Image className="hero-image" src="/images/hero.webp" fill preload sizes="100vw"
-          alt="Гостиная апартаментов Archa с жёлтым диваном и отдельной спальней" />
+        <HeroCarousel />
         <div className="wrap hero-content">
           <h1 id="hotel-title">{hotel.name}</h1>
           <p>Апарт-отель в Бишкеке</p>
