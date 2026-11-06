@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight, BedDouble, Images, MapPin, MessageCircle } from "lucide-react";
+import { ArrowRight, ArrowUpRight, BedDouble, Images, MapPin, MessageCircle, Phone } from "lucide-react";
 import { hotel, hotelMaps } from "../../lib/hotel";
 import { indexable, pageMetadata } from "../../lib/seo";
 import styles from "./links.module.css";
@@ -30,6 +30,10 @@ export default function HotelLinksPage() {
             <a className="button" href={hotel.whatsapp}>
               <MessageCircle size={20} aria-hidden="true" />
               Забронировать в WhatsApp
+              <ArrowUpRight size={18} aria-hidden="true" />
+            </a>
+            <a className={styles.link} href={`tel:${hotel.phone.replace(/\s/g, "")}`}>
+              <Phone size={20} aria-hidden="true" /> Позвонить
               <ArrowUpRight size={18} aria-hidden="true" />
             </a>
             <Link className={styles.link} href="/#rooms">
