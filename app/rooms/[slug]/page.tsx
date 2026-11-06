@@ -26,6 +26,12 @@ export default async function RoomPage({ params }: RoomPageProps) {
   const room = rooms.find((entry) => entry.slug === slug);
   if (!room) notFound();
 
+  const livingRoom = room.slug === "triple" ? "/images/hero.webp" : "/images/apartment.webp";
+  const details = [
+    { src: livingRoom, label: "Гостиная" },
+    { src: "/images/kitchen.webp", label: "Кухня" },
+    { src: "/images/bathroom.webp", label: "Душевая" },
+  ];
   const breadcrumb = roomBreadcrumbSchema(room.name, room.slug);
 
   return (
@@ -53,6 +59,20 @@ export default async function RoomPage({ params }: RoomPageProps) {
             <Image src={room.image} alt={room.imageAlt} fill preload sizes="(max-width: 720px) 100vw, 55vw" />
           </div>
         </div>
+        <section className="room-details" aria-labelledby="room-details-title">
+          <h2 id="room-details-title">Что внутри</h2>
+          <div className="rooms-grid">
+            {details.map(({ src, label }) => (
+              <figure key={label}>
+                <div className="room-image">
+                  <Image src={src} alt={`${label} · ${room.name}`} fill
+                    sizes="(max-width: 640px) 100vw, 33vw" />
+                </div>
+                <figcaption>{label}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </section>
       </article>
       <BookingSection room={room.name} />
     </main>

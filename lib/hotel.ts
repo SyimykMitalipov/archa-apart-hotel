@@ -1,3 +1,5 @@
+export const hotelCoordinates = { latitude: 42.933929, longitude: 74.653311 };
+
 export const hotel = {
   name: "Archa Apart Hotel",
   city: "Бишкек",
@@ -9,6 +11,20 @@ export const hotel = {
   instagram: "https://www.instagram.com/archa_apart_hotel/",
   description: "Апарт-отель Archa в Бишкеке. Апартаменты с отдельной спальней и кухней, семейные и трёхместные номера. Частная парковка, терраса и детская площадка.",
 };
+
+export const hotelMaps = [
+  { name: "2ГИС", href: hotel.map },
+  {
+    name: "Google Maps",
+    href: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+      `${hotelCoordinates.latitude},${hotelCoordinates.longitude}`,
+    )}`,
+  },
+  {
+    name: "Яндекс Карты",
+    href: `https://yandex.ru/maps/?pt=${hotelCoordinates.longitude},${hotelCoordinates.latitude}&z=17`,
+  },
+];
 
 export const rooms = [
   {

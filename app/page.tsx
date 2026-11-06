@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowDown, ArrowRight, ArrowUpRight, CarFront, MapPin, Trees, Wifi } from "lucide-react";
 import { PhotoGallery } from "../components/photo-gallery";
 import { BookingSection } from "../components/booking-section";
-import { hotel, rooms } from "../lib/hotel";
+import { hotel, hotelMaps, rooms } from "../lib/hotel";
 import { hotelSchema, pageMetadata } from "../lib/seo";
 
 export const metadata = pageMetadata(
@@ -35,7 +35,7 @@ export default function Home() {
       <div className="wrap info-strip">
         <div className="address">
           <span><MapPin size={20} aria-hidden="true" /> {hotel.street}</span>
-          <a className="text-link" href={hotel.map}>На карте <ArrowUpRight size={16} aria-hidden="true" /></a>
+          <a className="text-link" href="#location">На карте <ArrowUpRight size={16} aria-hidden="true" /></a>
         </div>
         <ul aria-label="Удобства">
           <li><Wifi size={22} aria-hidden="true" /> Wi-Fi</li>
@@ -85,7 +85,13 @@ export default function Home() {
       <section className="wrap location" id="location" aria-labelledby="location-title">
         <h2 id="location-title">Как добраться</h2>
         <address><MapPin size={20} aria-hidden="true" /> {hotel.city}, {hotel.street}</address>
-        <a className="text-link" href={hotel.map}>Открыть в 2ГИС <ArrowUpRight size={16} aria-hidden="true" /></a>
+        <nav className="map-links" aria-label="Открыть отель на карте">
+          {hotelMaps.map(({ name, href }) => (
+            <a key={name} className="button map-link" href={href}>
+              <MapPin size={16} aria-hidden="true" /> {name} <ArrowUpRight size={16} aria-hidden="true" />
+            </a>
+          ))}
+        </nav>
       </section>
 
       <BookingSection />
