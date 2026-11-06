@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { Footer, Header } from "../components/site-chrome";
+import { FloatingWhatsApp, Footer, Header } from "../components/site-chrome";
 import { siteOrigin } from "../lib/seo";
 import "./globals.css";
 
@@ -17,6 +17,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <Header />
         {children}
         <Footer />
+        <FloatingWhatsApp />
       </body>
     </html>
   );
