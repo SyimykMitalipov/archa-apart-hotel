@@ -120,6 +120,44 @@ img { display: block; }
   color: white;
 }
 
+.hero-photos, .hero-slide {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-slide { opacity: 0; transition: opacity 550ms ease-in-out; }
+.hero-slide[data-active="true"] { opacity: 1; }
+
+.hero-controls {
+  position: absolute;
+  z-index: 2;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px;
+  border-radius: 9px;
+  background: rgb(16 26 21 / 87%);
+  color: white;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+
+.hero-controls button {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.hero-controls button:hover { background: rgb(255 255 255 / 16%); }
+
 .hero-image { object-fit: cover; object-position: center 53%; }
 
 .hero::after {
@@ -544,5 +582,22 @@ img { display: block; }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .hero-slide { transition: none; }
+  .hero-controls .hero-autoplay { display: none; }
   .floating-whatsapp::before { animation: none; opacity: 0; }
+}
+
+.site-header nav { flex-wrap: wrap; }
+
+.blog-page { padding-block: 40px 56px; }
+.blog-page h1 { font-size: clamp(34px, 5vw, 64px); margin-block: 12px; }
+.blog-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin-top: 28px; }
+.blog-card { display: block; color: inherit; text-decoration: none; }
+.blog-card h2, .blog-post h2 { font-size: clamp(23px, 3vw, 32px); margin-block: 12px 8px; }
+.blog-card .text-link, .blog-post section .text-link { margin-top: 10px; }
+.blog-post { max-width: 760px; margin-inline: auto; }
+.blog-cover, .blog-post section, .blog-post > .button { margin-top: 24px; }
+
+@media (max-width: 640px) {
+  .blog-grid { grid-template-columns: 1fr; }
 }
