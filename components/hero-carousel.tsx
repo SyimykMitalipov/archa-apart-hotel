@@ -18,7 +18,10 @@ const slides = [
 
 export function HeroCarousel() {
   const photos = useRef<HTMLDivElement>(null);
+  const ready = useRef(new Set<number>());
   const [active, setActive] = useState(0);
+  const [pending, setPending] = useState<number | null>(null);
+  const [loaded, setLoaded] = useState<number[]>([0]);
   const [paused, setPaused] = useState(false);
 
   useEffect(() => {
@@ -29,10 +32,13 @@ export function HeroCarousel() {
     let timer: number | undefined;
 
     function updateTimer() {
-      window.clearInterval(timer);
+      window.clearTimeout(timer);
       if (visible && !motion.matches && !document.hidden) {
-        timer = window.setInterval(() => {
-          setActive((current) => (current + 1) % slides.length);
+        timer = window.setTimeout(() => {
+          const next = (active + 1) % slides.length;
+          setPending(next);
+          if (ready.current.has(next)) setActive(next);
+          setLoaded((current) => current.includes(next) ? current : [...current, next]);
         }, 3000);
       }
     }
@@ -49,23 +55,31 @@ export function HeroCarousel() {
       observer.disconnect();
       motion.removeEventListener("change", updateTimer);
       document.removeEventListener("visibilitychange", updateTimer);
-      window.clearInterval(timer);
+      window.clearTimeout(timer);
     };
-  }, [paused]);
+  }, [paused, active, loaded]);
 
   function move(step: number) {
     setPaused(true);
-    setActive((current) => (current + step + slides.length) % slides.length);
+    const next = (active + step + slides.length) % slides.length;
+    setLoaded((current) => current.includes(next) ? current : [...current, next]);
+    setPending(next);
+    if (ready.current.has(next)) setActive(next);
   }
 
   return (
     <>
       <div ref={photos} className="hero-photos">
-        {slides.map(({ src, alt, fit }, index) => (
+        {slides.map(({ src, alt, fit }, index) => loaded.includes(index) && (
           <div key={src} className="hero-slide" data-active={active === index} data-fit={fit}
             aria-hidden={active !== index}>
             <Image className="hero-image" src={src} alt={alt} fill
               sizes={fit === "contain" ? "(max-width: 640px) 260px, 395px" : "100vw"}
+              onLoad={() => {
+                ready.current.add(index);
+                if (pending === index) setActive(index);
+              }}
+              loading={index === 0 ? undefined : "eager"}
               preload={index === 0} fetchPriority={index === 0 ? undefined : "low"} />
           </div>
         ))}
@@ -78,7 +92,7 @@ export function HeroCarousel() {
         <button type="button" onClick={() => move(1)} aria-label="Следующее фото на главной">
           <ChevronRight size={19} aria-hidden="true" />
         </button>
-        <button type="button" className="hero-autoplay" onClick={() => setPaused(!paused)}
+        <button type="button" className="hero-autoplay" onClick={() => { setPending(null); setPaused(!paused); }}
           aria-label={paused ? "Продолжить показ фото" : "Приостановить показ фото"}>
           {paused ? <Play size={17} aria-hidden="true" /> : <Pause size={17} aria-hidden="true" />}
         </button>

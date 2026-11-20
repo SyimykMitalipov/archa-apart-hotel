@@ -10,6 +10,7 @@ const photos = photoGroups.flatMap(({ photos }) => [...photos]);
 export function PhotoGallery() {
   const dialog = useRef<HTMLDialogElement>(null);
   const opener = useRef<HTMLButtonElement>(null);
+  const [open, setOpen] = useState(false);
   const [group, setGroup] = useState<string | null>(null);
   const [current, setCurrent] = useState(0);
   const visibleGroups = photoGroups.filter(({ name }) => !group || name === group);
@@ -40,6 +41,7 @@ export function PhotoGallery() {
             onClick={(event) => {
               opener.current = event.currentTarget;
               setCurrent(index);
+              setOpen(true);
               dialog.current?.showModal();
             }}>
             <Image src={`/images/${photoId}.webp`} alt={description} fill
@@ -48,7 +50,7 @@ export function PhotoGallery() {
         ))}
       </div>
       <dialog ref={dialog} className="gallery-dialog" aria-label="Просмотр фотографии"
-        onClose={() => opener.current?.focus()}
+        onClose={() => { setOpen(false); opener.current?.focus(); }}
         onKeyDown={(event) => {
           if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
             event.preventDefault();
@@ -59,7 +61,7 @@ export function PhotoGallery() {
           <button type="button" className="gallery-close" aria-label="Закрыть просмотр"
             onClick={() => dialog.current?.close()} autoFocus><X /></button>
           <div className="gallery-full-photo">
-            <Image src={`/images/${id}.webp`} alt={alt} fill sizes="(max-width: 960px) 95vw, 960px" />
+            {open && <Image src={`/images/${id}.webp`} alt={alt} fill sizes="(max-width: 960px) 95vw, 960px" />}
           </div>
           <div className="gallery-controls">
             <button type="button" onClick={() => move(-1)} aria-label="Предыдущее фото"><ChevronLeft /></button>

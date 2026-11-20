@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 import { hotel, hotelCoordinates } from "./hotel";
 
 function configuredOrigin() {
-  const raw = process.env.SITE_URL;
+  const productionHost = process.env.VERCEL_ENV === "production"
+    ? process.env.VERCEL_PROJECT_PRODUCTION_URL
+    : undefined;
+  const raw = process.env.SITE_URL || (productionHost ? `https://${productionHost}` : undefined);
   if (!raw) return undefined;
 
   const url = new URL(raw);
@@ -15,7 +18,9 @@ function configuredOrigin() {
 
 export const siteOrigin = configuredOrigin();
 export const indexable = siteOrigin?.startsWith("https://") === true &&
-  process.env.SITE_INDEXABLE === "true";
+  process.env.VERCEL_ENV !== "preview" &&
+  (process.env.SITE_INDEXABLE === "true" ||
+    (process.env.VERCEL_ENV === "production" && process.env.SITE_INDEXABLE !== "false"));
 
 export function pageMetadata(title: string, description: string, path: string): Metadata {
   const url = siteOrigin ? new URL(path, siteOrigin).href : undefined;

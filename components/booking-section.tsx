@@ -1,5 +1,5 @@
 import { hotel } from "../lib/hotel";
-import { BookingForm } from "./booking-form";
+import { DeferredBookingForm } from "./deferred-booking-form";
 
 export function BookingSection({ room }: { room?: string }) {
   return (
@@ -10,7 +10,7 @@ export function BookingSection({ room }: { room?: string }) {
           <p>Укажите даты и число гостей. В WhatsApp откроется готовое сообщение для администратора.</p>
           <a href={hotel.whatsapp} className="text-link">Написать без указания дат ↗</a>
         </div>
-        <BookingForm whatsapp={hotel.whatsapp} room={room} />
+        <DeferredBookingForm whatsapp={hotel.whatsapp} room={room} />
       </div>
     </section>
   );
