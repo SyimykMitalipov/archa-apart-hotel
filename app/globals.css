@@ -612,3 +612,8 @@ img { display: block; }
 body:has(> [data-hotel-links]) > :is(.site-header, .site-footer, .floating-whatsapp) {
   display: none;
 }
+
+.deferred-booking { min-height: 240px; }
+@media (max-width: 640px) {
+  .deferred-booking { min-height: 330px; }
+}
